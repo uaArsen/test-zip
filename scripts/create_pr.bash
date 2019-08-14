@@ -18,7 +18,7 @@ done
 
 git config --global credential.helper store
 git config --global user.email "arsenzhd@gmail.com"
-git config --global user.name $DOCS_GITHUB_TOKEN
+git config --global user.name "uaArsen"
 git clone $repo $HOME/$repo_name
 
 cd $HOME/$repo_name || exit
