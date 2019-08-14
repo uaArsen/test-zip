@@ -20,10 +20,12 @@ git clone $repo $HOME/$repo_name
 
 cd $HOME/$repo_name || exit
 
+git status
 git checkout -b $branch_name
 
 cp $path/README.md $HOME/$repo_name/content/_components/$projectName.md
 git add $HOME/$repo_name/content/_components/$projectName.md
 git commit -m"Update docs for component: $projectName"
+git status
 git push -u origin $branch_name
 git request-pull master $repo $branch_name
