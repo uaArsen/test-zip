@@ -16,7 +16,7 @@ while getopts ":p:n:" opt; do
   esac
 done
 
-git clone $repo $HOME
+git clone $repo $HOME/$repo_name
 
 cd $HOME/$repo_name || exit
 
