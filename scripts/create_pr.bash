@@ -16,6 +16,10 @@ while getopts ":p:n:" opt; do
   esac
 done
 
+git config --global credential.helper store
+
+git config --global user.email "arsenzhd@gmail.com"
+git config --global user.name $DOCS_GITHUB_TOKEN
 git clone $repo $HOME/$repo_name
 
 cd $HOME/$repo_name || exit
