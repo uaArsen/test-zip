@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-repo=https://github.com/uaArsen/test-zip.git
+repo="https://$DOCS_GITHUB_TOKEN@github.com/uaArsen/test-zip.git"
 repo_name='test-zip'
 current_time=$(date +'%s')
 branch_name=docs-update-$projectName-$current_time
@@ -17,7 +17,6 @@ while getopts ":p:n:" opt; do
 done
 
 git config --global credential.helper store
-
 git config --global user.email "arsenzhd@gmail.com"
 git config --global user.name $DOCS_GITHUB_TOKEN
 git clone $repo $HOME/$repo_name
@@ -31,5 +30,5 @@ cp $path/README.md $HOME/$repo_name/content/_components/$projectName.md
 git add $HOME/$repo_name/content/_components/$projectName.md
 git commit -m"Update docs for component: $projectName"
 git status
-git push -u origin $branch_name
+git push -q -u $repo origin $branch_name
 git request-pull master $repo $branch_name
