@@ -20,7 +20,7 @@ git clone $repo $HOME/$repo_name
 
 cd $HOME/$repo_name || exit
 
-git branch -b $branch_name
+git checkout -b $branch_name
 
 cp $path/README.md $HOME/$repo_name/content/_components/$projectName.md
 git add $HOME/$repo_name/content/_components/$projectName.md
