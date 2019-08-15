@@ -20,8 +20,8 @@ email="arsenzhd@gmail.com"
 username="uaArsen"
 
 git config --global credential.helper store
-git config --global user.email email
-git config --global user.name username
+git config --global user.email $email
+git config --global user.name $username
 git clone $repo $HOME/$repo_name
 cd $HOME/$repo_name || exit
 git checkout -b $branch_name
@@ -29,7 +29,7 @@ cp $path/README.md $HOME/$repo_name/content/_components/$project_name.md
 content="---
 title: $project_name
 layout: article
-section: **PLACEHOLDER**
+section: PLACEHOLDER
 ---
 ---
 "
