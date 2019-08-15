@@ -33,7 +33,7 @@ section: **PLACEHOLDER**
 ---
 ---
 "
-sed -i "1i$content" $HOME/$repo_name/content/_components/$project_name.md
+echo "$content" | cat - $HOME/$repo_name/content/_components/$project_name.md > temp && mv temp $HOME/$repo_name/content/_components/$project_name.md
 git add $HOME/$repo_name/content/_components/$project_name.md
 git commit -m "Update docs for component: $project_name"
 git push -q --repo $repo --set-upstream  origin $branch_name
