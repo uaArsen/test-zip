@@ -33,6 +33,6 @@ git commit -m "Update docs for component: $projectName"
 git push -q --repo $repo --set-upstream  origin $branch_name
 
 json_template='{"title":"%s", "head":"%s", "base":"master"}'
-payload=$(printf $json_template "Updating docs for component: $projectName" $branch_name)
+payload=$(printf "$json_template" "Updating docs for component: $projectName" "$branch_name")
 echo $payload
 curl -u $username:$DOCS_GITHUB_TOKEN --data "$payload" https://api.github.com/repos/$username/$repo_name/pulls
