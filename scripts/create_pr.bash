@@ -25,6 +25,7 @@ git config --global user.name username
 git clone $repo $HOME/$repo_name
 
 cd $HOME/$repo_name || exit
+ls -la
 
 git checkout -b $branch_name
 cp $path/README.md $HOME/$repo_name/content/_components/$projectName.md
