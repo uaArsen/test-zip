@@ -35,6 +35,7 @@ section: **PLACEHOLDER**
 ---
 %s'
 content=$(printf "$content_template" "$project_name" "$data")
+echo $content
 echo $content >> $HOME/$repo_name/content/_components/$project_name.md
 git add $HOME/$repo_name/content/_components/$project_name.md
 git commit -m "Update docs for component: $project_name"
