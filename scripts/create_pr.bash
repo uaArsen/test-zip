@@ -25,15 +25,13 @@ git config --global user.name username
 git clone $repo $HOME/$repo_name
 
 cd $HOME/$repo_name || exit
-ls -la
 
 git checkout -b $branch_name
 cp $path/README.md $HOME/$repo_name/content/_components/$projectName.md
 git add $HOME/$repo_name/content/_components/$projectName.md
 git commit -m "Update docs for component: $projectName"
-git status
 git push -q --repo $repo --set-upstream  origin $branch_name
 
 json_template='{"title":"%s", "head":"%s", "base":"master"}'
 payload=$(printf $json_template "Updating docs for component: $projectName" $branch_name)
-curl -u $username:$DOCS_GITHUB_TOKEN --request POST --data $payload https://api.github.com/repos/$username/$repo_name/pulls
+curl -u $username:$DOCS_GITHUB_TOKEN -v --data "$payload" https://api.github.com/repos/$username/$repo_name/pulls
