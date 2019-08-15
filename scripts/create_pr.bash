@@ -27,18 +27,13 @@ cd $HOME/$repo_name || exit
 git checkout -b $branch_name
 cp $path/README.md $HOME/$repo_name/content/_components/$project_name.md
 data=$(cat $HOME/$repo_name/content/_components/$project_name.md)
-content_template='---
-title: %s
+content="---
+title: $project_name
 layout: article
 section: **PLACEHOLDER**
 ---
 ---
-%s'
-echo $data
-echo $project_name
-echo $content_template
-content=$(printf "$content_template" "$project_name" "$data")
-echo $content
+$data"
 echo $content >> $HOME/$repo_name/content/_components/$project_name.md
 git add $HOME/$repo_name/content/_components/$project_name.md
 git commit -m "Update docs for component: $project_name"
