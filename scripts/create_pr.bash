@@ -33,4 +33,7 @@ git add $HOME/$repo_name/content/_components/$projectName.md
 git commit -m "Update docs for component: $projectName"
 git status
 git push -q --repo $repo --set-upstream  origin $branch_name
-git request-pull master $repo $branch_name
+
+json_template='{"title":"%s", "head":"%s", "base":"master"}'
+payload=$(printf $json_template "Updating docs for component: $projectName" $branch_name)
+curl -u $username:$DOCS_GITHUB_TOKEN --request POST --data $payload https://api.github.com/repos/$username/$repo_name/pulls
