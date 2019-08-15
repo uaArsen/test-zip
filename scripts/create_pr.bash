@@ -31,5 +31,5 @@ cp $path/README.md $HOME/$repo_name/content/_components/$projectName.md
 git add $HOME/$repo_name/content/_components/$projectName.md
 git commit -m "Update docs for component: $projectName"
 git status
-git push -q -u $repo origin $branch_name
+git push -q --repo $repo --set-upstream  origin $branch_name
 git request-pull master $repo $branch_name
