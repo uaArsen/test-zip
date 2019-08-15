@@ -5,7 +5,7 @@ while getopts ":p:n:" opt; do
   case $opt in
     p) path="$OPTARG"
     ;;
-    n) projectName="$OPTARG"
+    n) project_name="$OPTARG"
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     ;;
@@ -15,7 +15,7 @@ done
 repo="https://$DOCS_GITHUB_TOKEN@github.com/uaArsen/test-zip.git"
 repo_name='test-zip'
 current_time=$(date +'%s')
-branch_name=docs-update-$projectName-$current_time
+branch_name=docs-update-$project_name-$current_time
 email="arsenzhd@gmail.com"
 username="uaArsen"
 
@@ -23,16 +23,23 @@ git config --global credential.helper store
 git config --global user.email email
 git config --global user.name username
 git clone $repo $HOME/$repo_name
-
 cd $HOME/$repo_name || exit
-
 git checkout -b $branch_name
-cp $path/README.md $HOME/$repo_name/content/_components/$projectName.md
-git add $HOME/$repo_name/content/_components/$projectName.md
-git commit -m "Update docs for component: $projectName"
+cp $path/README.md $HOME/$repo_name/content/_components/$project_name.md
+data=$(cat $HOME/$repo_name/content/_components/$project_name.md)
+content_template='---
+title: %s
+layout: article
+section: **PLACEHOLDER**
+---
+---
+%s'
+content=$(printf "$content_template" "$project_name" "$data")
+echo $content >> $HOME/$repo_name/content/_components/$project_name.md
+git add $HOME/$repo_name/content/_components/$project_name.md
+git commit -m "Update docs for component: $project_name"
 git push -q --repo $repo --set-upstream  origin $branch_name
 
 json_template='{"title":"%s", "head":"%s", "base":"master"}'
-payload=$(printf "$json_template" "Updating docs for component: $projectName" "$branch_name")
-echo $payload
+payload=$(printf "$json_template" "Updating docs for component: $project_name" "$branch_name")
 curl -u $username:$DOCS_GITHUB_TOKEN --data "$payload" https://api.github.com/repos/$username/$repo_name/pulls
