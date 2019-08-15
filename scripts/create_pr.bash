@@ -34,6 +34,9 @@ section: **PLACEHOLDER**
 ---
 ---
 %s'
+echo $data
+echo $project_name
+echo $content_template
 content=$(printf "$content_template" "$project_name" "$data")
 echo $content
 echo $content >> $HOME/$repo_name/content/_components/$project_name.md
